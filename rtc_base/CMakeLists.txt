@@ -2,11 +2,6 @@
 # refer to the root source directory of the project as ${HELLO_SOURCE_DIR} and
 # to the root binary directory of the project as ${HELLO_BINARY_DIR}.
 
-
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-
-add_definitions(-DWEBRTC_MAC -DWEBRTC_POSIX -DOPENSSL_IS_BORINGSSL)
-
 find_package(PkgConfig REQUIRED)
 find_package(OpenSSL REQUIRED)
 pkg_check_modules(JSONCPP jsoncpp)
@@ -27,20 +22,19 @@ file(GLOB RTC_BASE_EXCLUDE "*unittest*" "*test*" "*win*" "*libevent*")
 list(REMOVE_ITEM RTC_BASE_SRCS ${RTC_BASE_EXCLUDE})
 
 
-add_library (rtc_base_lib STATIC ${RTC_BASE_SRCS} ${RTC_BASE_DARWIN_SRCS})
-set_target_properties(rtc_base_lib PROPERTIES
-  FRAMEWORK TRUE
-  FRAMEWORK_VERSION C
-  MACOSX_FRAMEWORK_IDENTIFIER com.google.wrtc
+add_library (rtc_base_lib SHARED ${RTC_BASE_SRCS} ${RTC_BASE_DARWIN_SRCS})
+#set_target_properties(rtc_base_lib PROPERTIES
+#  FRAMEWORK TRUE
+#  FRAMEWORK_VERSION C
+#  MACOSX_FRAMEWORK_IDENTIFIER com.google.wrtc
   #MACOSX_FRAMEWORK_INFO_PLIST Info.plist
   #PUBLIC_HEADER dynamicFramework.h
   #XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY "iPhone Developer"
-)
+#)
 
 target_include_directories (rtc_base_lib PUBLIC
   "${CMAKE_CURRENT_SOURCE_DIR}/.."
   "${OPENSSL_INCLUDE_DIR}"
-
 )
 
 
