@@ -1,8 +1,7 @@
-###webrtc-cmake
+### webrtc-cmake
 Building webrtc.googlesource.com with Cmake
-Documentation for build flags, to be passed as "-D..."
-
-
+WIP. Current focus is on interop with nixpkgs (darwin+linux)
+Documentation for build flags, to be passed as "-D..." will be here...
 
 
 **WebRTC is a free, open software project** that provides browsers and mobile
