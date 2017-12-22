@@ -7,30 +7,30 @@ find_package(OpenSSL REQUIRED)
 pkg_check_modules(JSONCPP jsoncpp)
 
 
-file(GLOB RTC_BASE_SRCS "*.cc")
+set(RTC_BASE_SRCS
+
+)
 
 if (${APPLE})
-  file(GLOB RTC_BASE_DARWIN_SRCS "*.mm")
+  set(RTC_BASE_DARWIN_SRCS
+
+  )
   find_library(objc objc)
   find_library(CoreServices CoreServices)
   find_library(CoreFoundation CoreFoundation)
   find_library(Foundation Foundation)
 endif()
 
-file(GLOB RTC_BASE_EXCLUDE "*unittest*" "*test*" "*win*" "*libevent*")
+#file(GLOB RTC_BASE_EXCLUDE "*unittest*" "*test*" "*win*" "*libevent*")
 
-list(REMOVE_ITEM RTC_BASE_SRCS ${RTC_BASE_EXCLUDE})
+#list(REMOVE_ITEM RTC_BASE_SRCS ${RTC_BASE_EXCLUDE})
 
 
-add_library (rtc_base_lib SHARED ${RTC_BASE_SRCS} ${RTC_BASE_DARWIN_SRCS})
-#set_target_properties(rtc_base_lib PROPERTIES
-#  FRAMEWORK TRUE
-#  FRAMEWORK_VERSION C
-#  MACOSX_FRAMEWORK_IDENTIFIER com.google.wrtc
-  #MACOSX_FRAMEWORK_INFO_PLIST Info.plist
-  #PUBLIC_HEADER dynamicFramework.h
-  #XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY "iPhone Developer"
-#)
+add_library (rtc_base_lib SHARED
+  ${RTC_BASE_SRCS}
+  ${RTC_BASE_DARWIN_SRCS}
+)
+
 
 target_include_directories (rtc_base_lib PUBLIC
   "${CMAKE_CURRENT_SOURCE_DIR}/.."
@@ -39,6 +39,7 @@ target_include_directories (rtc_base_lib PUBLIC
 
 
 target_link_libraries(rtc_base_lib
+  rtc_base_approved
   ${JSONCPP_LIBRARIES}
   ${OPENSSL_LIBRARIES}
 
@@ -48,3 +49,12 @@ target_link_libraries(rtc_base_lib
   ${Foundation}
   ${objc}
 )
+
+#set_target_properties(rtc_base_lib PROPERTIES
+#  FRAMEWORK TRUE
+#  FRAMEWORK_VERSION C
+#  MACOSX_FRAMEWORK_IDENTIFIER com.google.wrtc
+  #MACOSX_FRAMEWORK_INFO_PLIST Info.plist
+  #PUBLIC_HEADER dynamicFramework.h
+  #XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY "iPhone Developer"
+#)

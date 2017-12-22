@@ -1,0 +1,7 @@
+add_subdirectory("sequenced_task_checker")
+add_subdirectory("weak_ptr")
+add_subdirectory("rtc_numerics")
+add_subdirectory("rtc_base")
+add_subdirectory("rtc_task_queue")
+add_subdirectory("rtc_base_generic")
+add_subdirectory("rtc_base_approved")

@@ -1,4 +1,4 @@
-# //common_audio
+# //rtc_system_wrappers
 
 file(GLOB_RECURSE RTC_BASE_SRCS  "*.cc" "*.c")
 
@@ -15,7 +15,6 @@ add_library (rtc_system_wrappers SHARED ${RTC_BASE_SRCS} )
 
 target_include_directories (rtc_system_wrappers PUBLIC
   ${PROJECT_SOURCE_DIR}
-  "signal_processing/include"
 )
 
 target_link_libraries(rtc_system_wrappers

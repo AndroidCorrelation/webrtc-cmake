@@ -1,5 +1,7 @@
 # :api
-
+# exports:
+#   - libjingle_peerconnection_api
+#   - 
 add_definitions(-DWEBRTC_USE_BUILTIN_ISAC_FLOAT)
 
 file(GLOB RTC_BASE_SRCS "*.cc")
